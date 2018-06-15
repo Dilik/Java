@@ -1,0 +1,27 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class FlowLO{
+    public static void main(String[] args){
+	FlowLO flow = new FlowLO();
+	flow.go();
+    }
+
+    public void go(){
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	panel.setBackground(Color.darkGray);
+	panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); //to prevent buttons lining  up on the row
+
+	JButton button1 = new JButton("Shock Me 1");
+	JButton button2 = new JButton("Shock Me 2");
+
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	panel.add(button1); //panel manager controls button
+	panel.add(button2);
+	frame.getContentPane().add(BorderLayout.EAST, panel); // frame control manager controls panel not the button
+	frame.setSize(200, 200);
+	frame.setVisible(true);
+	
+    }
+}

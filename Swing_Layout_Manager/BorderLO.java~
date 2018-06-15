@@ -1,0 +1,28 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class BorderLO {
+
+    public static void main(String[] args){
+	BorderLO gui = new BorderLO();
+	gui.go();
+    }
+
+    public void go(){
+
+	JFrame frame = new JFrame();
+	JButton button = new JButton("click me.......................");
+	JButton buttonS = new JButton("South");
+	Font bigFont = new Font("serif", Font.BOLD, 28);
+
+	
+	buttonS.setFont(bigFont);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.getContentPane().add(BorderLayout.EAST, button);
+	frame.getContentPane().add(BorderLayout.SOUTH, buttonS);
+	frame.setSize(200,200);
+	frame.setVisible(true);
+	
+    }
+    
+}
