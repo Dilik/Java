@@ -35,6 +35,6 @@ public class TextArea implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent ev){
-	text.append("button clicked !!! \n");
+	text.append("Hello Barmo \n");
     }
 }
