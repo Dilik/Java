@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+import java.net.MalformedURLException;
+import net.aksingh.owmjapis.CurrentWeather;
+import net.aksingh.owmjapis.OpenWeatherMap;
+import org.json.JSONException;
+
+
+public class Weather{
+
+    public static final void main(String[] args){
+	boolean isMetric = true;
+	String owmApiKey = "49d00b8f2cea3f44b13318df46f68364";
+	String weatherCity = "Columbus,GA";
+	byte forecastDays = 3;
+
+	OpenWeatherMap.Units units = (isMetric)
+	            ? OpenWeatherMap.Units.METRIC
+	    : OpenWeatherMap.Units.IMPERIAL;
+	OpenWeatherMap owm = new OpenWeatherMap(units, owmApiKey);
+	try {
+	    DailyForecast forecast = owm.dailyForecastByCityName(weatherCity, forecastDays);
+	    System.out.println("Weather for: " + forecast.getCityInstance().getCityName());
+	    int numForecasts = forecast.getForecastCount();
+	    for (int i = 0; i < numForecasts; i++) {
+		DailyForecast.Forecast dayForecast = forecast.getForecastInstance(i);
+		DailyForecast.Forecast.Temperature temperature = dayForecast.getTemperatureInstance();
+		System.out.println("\t" + dayForecast.getDateTime());
+		System.out.println("\tTemperature: " + temperature.getMinimumTemperature() +
+				   " to " + temperature.getMaximumTemperature() + "\n");
+	    }
+	}
+	catch (IOException | JSONException e) {
+	    e.printStackTrace();
+	}
+	
+    }
+}

@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Product{
+    public double price;
+    private int id;
+    private int quantity;
+
+    public Product(int id, double price, int qty){
+	this.price = price;
+	this.id = id;
+	this.quantity = qty;
+    }
+
+    public void incQty(int qty){
+	this.quantity += qty;
+    }
+
+    public void decQty(int qty){
+	this.quantity = Math.max(this.quantity - qty, 0);
+    }
+
+    public int getQty(){
+	return this.quantity;
+    }
+
+    public String toString(){
+	return String.format("%d\t%.2f\t%d",id,price,quantity);
+    }
+}
+
+class Inventory{
+    private List<Product> products;
+
+    public Inventory(){
+	products = new ArrayList<Product>();
+    }
+
+    public void addProduct(Product p){
+	products.add(p);
+    }
+
+    public void printInventory(){
+	double sum = 0;
+
+	for(Product p : products){
+	    System.out.println(p.toString());
+	    sum += p.price * p.getQty();
+	}
+
+	System.out.println("Total sum : " + sum);
+    }
+}
+
+public class SimpleInventory{
+
+    public static void main(String[] args){
+
+	Product p1 = new Product(1, 5.40, 4);
+	Product p2 = new Product(2, 3.50, 6);
+	Product p3 = new Product(3, 14, 2);
+	Product p4 = new Product(4, 20.5, 5);
+
+	Inventory inv = new Inventory();
+
+	inv.addProduct(p1);
+	inv.addProduct(p2);
+	inv.addProduct(p3);
+	inv.addProduct(p4);
+
+	p1.decQty(1);
+	p2.incQty(2);
+
+	inv.printInventory();
+    }
+}
